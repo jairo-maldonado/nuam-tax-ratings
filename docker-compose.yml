@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: nuam_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: nuam_tax_ratings
+      POSTGRES_USER: nuam_user
+      POSTGRES_PASSWORD: nuam_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nuam_user -d nuam_tax_ratings"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mongo:
+    image: mongo:7
+    container_name: nuam_mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: nuam_user
+      MONGO_INITDB_ROOT_PASSWORD: nuam_pass
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
+  mongo_data:

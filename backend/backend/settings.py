@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
+load_dotenv(BASE_DIR.parent / ".env") 
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "insecure-dev-key")
 DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
@@ -67,7 +68,10 @@ DATABASES = {
     }
 }
 
-MONGO_URI = os.getenv("MONGO_URI")
+MONGO_URI = os.getenv(
+    "MONGO_URI",
+    "mongodb://nuam_user:nuam_pass@localhost:27017/?authSource=admin",
+)
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME", "nuam_audit")
 
 AUTH_USER_MODEL = "accounts.User"

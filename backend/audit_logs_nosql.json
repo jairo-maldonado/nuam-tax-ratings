@@ -1,0 +1,19 @@
+[
+  {
+    "username": "jairo",
+    "role": "BROKER",
+    "filename": "error.csv",
+    "status": "REJECTED",
+    "created_count": 0,
+    "error_count": 1,
+    "errors": [
+      {
+        "row": 3,
+        "field": "risk_factor",
+        "code": "factor_sum_exceeded",
+        "message": "Factor sum for 11111111-1 / 2024 / DJ_1949 would be 1.1000, exceeding 1.0000."
+      }
+    ],
+    "timestamp": "2026-11-13T15:00:57.186902+00:00"
+  }
+]
